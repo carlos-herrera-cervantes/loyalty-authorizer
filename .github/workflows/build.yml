@@ -4,6 +4,9 @@ on: [push]
 
 env:
   PORT: 9001
+  MONGODB_URI: mongodb://localhost:27017
+  MONGODB_DATABASE: loyalty-authorizer
+  JWT_SECRET_KEY: iutherugheughufiw734y348234732e8322742y38fd4
 
 jobs:
   build:
