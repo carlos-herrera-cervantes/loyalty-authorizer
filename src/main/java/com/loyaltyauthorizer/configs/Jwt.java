@@ -6,6 +6,6 @@ public class Jwt {
 
     public static final String SECRET_KEY = System.getenv("JWT_SECRET_KEY");
 
-    public static final long EXPIRATION = 18000;
+    public static final int EXPIRATION_DAYS = 5;
     
 }

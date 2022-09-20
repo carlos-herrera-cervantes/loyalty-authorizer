@@ -39,6 +39,8 @@ public class UserControllerTests {
     @Test
     void createReturn201() throws Exception {
         User user = new User();
+        user.setEmail("test.user@example.com");
+        user.setPassword("secret123");
 
         when(userRepository.save(any(User.class))).thenReturn(user);
 

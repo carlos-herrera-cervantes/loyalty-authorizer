@@ -1,8 +1,7 @@
 package com.loyaltyauthorizer.services;
 
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -16,15 +15,20 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class TokenManagerService {
 
     public String generateToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
         String[] roles = user.getRoles();
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, Jwt.EXPIRATION_DAYS);
+
+        Date expirationDate = calendar.getTime();
 
         return Jwts.builder()
-            .setClaims(claims)
             .setSubject(user.getEmail())
             .setAudience(String.join(",", roles))
-            .setExpiration(new Date(System.currentTimeMillis() + Jwt.EXPIRATION * 1000))
-            .signWith(SignatureAlgorithm.HS512, Jwt.SECRET_KEY)
+            .setId(user.getId())
+            .setIssuedAt(new Date())
+            .setExpiration(expirationDate)
+            .signWith(SignatureAlgorithm.HS512, Jwt.SECRET_KEY.getBytes())
             .compact();
     }
 

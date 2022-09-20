@@ -3,6 +3,7 @@ package com.loyaltyauthorizer.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -38,7 +39,9 @@ public class AuthenticationController {
             return new ResponseEntity<MessageResponse>(HttpStatus.NOT_FOUND);
         }
 
-        if (!credentials.getPassword().equals(user.getPassword()) || user.isDeactivated()) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (!(passwordEncoder.matches(credentials.getPassword(), user.getPassword())) || user.isDeactivated()) {
             return new ResponseEntity<MessageResponse>(HttpStatus.UNAUTHORIZED);
         }
 
