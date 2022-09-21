@@ -66,7 +66,7 @@ public class AuthenticationControllerTests {
     @Test
     void signInReturn401() throws Exception {
         User user = new User();
-        user.setPassword("secret123");
+        user.setPassword("$2a$10$rNTAv5ih8YtvbvlKb7IJdOGy0uphhKxn3scdhNAGzoTvsUfHKGK1e");
         user.setDeactivated(false);
 
         when(userRepository.findByEmail(anyString())).thenReturn(user);
@@ -92,7 +92,7 @@ public class AuthenticationControllerTests {
     @Test
     void signInReturn200() throws Exception {
         User user = new User();
-        user.setPassword("secret123");
+        user.setPassword("$2a$10$rNTAv5ih8YtvbvlKb7IJdOGy0uphhKxn3scdhNAGzoTvsUfHKGK1e");
         user.setDeactivated(false);
 
         when(userRepository.findByEmail(anyString())).thenReturn(user);

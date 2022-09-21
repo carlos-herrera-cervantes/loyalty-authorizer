@@ -79,7 +79,7 @@ public class ConsumerController {
         consumer.setActive(false);
         consumerRepository.save(consumer);
 
-        String key = String.format(Redis.API_KEY, apiKey);
+        String key = String.format(Redis.API_KEY, consumer.getApiKey());
         userSessionRepository.destroySession(key);
 
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
